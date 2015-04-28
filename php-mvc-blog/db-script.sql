@@ -5,6 +5,7 @@ USE `mvc`;
 -- Host: localhost    Database: mvc
 -- ------------------------------------------------------
 -- Server version	5.6.21
+-- ------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
