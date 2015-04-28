@@ -1,2 +1,19 @@
 SoftUni
 https://softuni.bg/trainings/23/Web-Development-Basics-Apr-2015
+http://svn.softuni.org/admin/svn/web-dev-basics/April-2015/
+
+Front Controller Pattern
+http://en.wikipedia.org/wiki/Front_Controller_pattern
+
+
+Rewrite URLs with .htaccess
+http://code.tutsplus.com/tutorials/the-ultimate-guide-to-htaccess-files--net-4757
+
+
+mod_rewrite
+http://code.tutsplus.com/tutorials/an-in-depth-guide-to-mod_rewrite-for-apache--net-6708
+
+
+
+
+

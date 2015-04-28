@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/content/.*$
+  RewriteCond %{REQUEST_URI} !^/favicon\.ico$
+  RewriteRule ^ index.php
+</IfModule>
