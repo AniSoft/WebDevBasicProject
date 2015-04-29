@@ -6,15 +6,16 @@ abstract class BaseController
     protected $action;
     protected $isViewRendered = false;
 
-    function _construct($controllerName, $action)
+    public function _construct($controllerName, $action)
     {
         $this->controllerName = $controllerName;
         $this->action = $action;
+        $this->onInit();
     }
 
-    public function index()
+    public function onInit()
     {
-        // Implement the default action in the subclasses
+        // Implement initializing logic in the subclasses
     }
 
     // Print Default View for current Action
