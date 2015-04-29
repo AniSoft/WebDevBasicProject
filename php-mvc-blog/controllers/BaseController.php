@@ -3,13 +3,13 @@
 abstract class BaseController
 {
     protected $controllerName;
-    protected $action;
+    protected $actionName;
     protected $isViewRendered = false;
 
-    public function _construct($controllerName, $action)
+    public function _construct($controllerName, $actionName)
     {
         $this->controllerName = $controllerName;
-        $this->action = $action;
+        $this->actionName = $actionName;
         $this->onInit();
     }
 
@@ -23,7 +23,7 @@ abstract class BaseController
     {
         if (!$this->isViewRendered) {
             if ($viewName == null) {
-                $viewName = $this->action;
+                $viewName = $this->actionName;
             }
 
             $viewFileName = 'views/' . $this->controllerName
