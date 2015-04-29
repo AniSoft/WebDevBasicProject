@@ -1,0 +1,10 @@
+body>header{
+    background: #eee;
+    padding: 5px;
+}
+
+body>footer{
+    background: #eee;
+    padding: 5px;
+    text-align: center;
+}

@@ -4,6 +4,7 @@ abstract class BaseController
 {
     protected $controllerName;
     protected $actionName;
+    protected $layoutName=DEFAULT_LAYOUT;
     protected $isViewRendered = false;
 
     public function _construct($controllerName, $actionName)
@@ -19,7 +20,7 @@ abstract class BaseController
     }
 
     // Print Default View for current Action
-    public function renderView($viewName = null)
+    public function renderView($viewName = null,$includeLayout=true)
     {
         if (!$this->isViewRendered) {
             if ($viewName == null) {
@@ -28,7 +29,18 @@ abstract class BaseController
 
             $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
+            if($includeLayout){
+                $headerFile='views/layout/'.$this->layoutName.'header.php';
+                include_once($headerFile);
+            }
+
             include_once($viewFileName);
+
+            if($includeLayout){
+                $footerFile='views/layout/'.$this->layoutName.'footer.php';
+                include_once($footerFile);
+            }
+
             $this->isViewRendered=true;
         }
     }
