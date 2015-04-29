@@ -22,8 +22,12 @@ abstract class BaseController
         if ($viewName == null) {
             $viewName = $this->action;
         }
-        $viewFileName = 'views/'. $this->controllerName
-            .'/'. $viewName . '.php';
-        include_once($viewFileName);
+        //$viewFileName = 'views/'. $this->controllerName
+            //.'/'. $viewName . '.php';
+        //include_once($viewFileName);
+
+
+        include_once('views/' . $this->controllerName . '/' . $viewName . '.php');
+
     }
 }
