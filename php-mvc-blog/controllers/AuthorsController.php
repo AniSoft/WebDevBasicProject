@@ -6,4 +6,9 @@ class AuthorsController extends BaseController
     public function create(){
         $this->renderView("index");
     }
+
+    public function delete(){
+        $this->renderView("index");
+    }
+
 }
