@@ -11,14 +11,10 @@
 
 <body>
     <header>
-        <img src="/content/images/logo.png">
+        <a href="/"><img src="/content/images/logo.png"></a>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/authors">Authors</a></li>
             <li><a href="/books">Books</a></li>
         </ul>
     </header>
-
-
-
-
