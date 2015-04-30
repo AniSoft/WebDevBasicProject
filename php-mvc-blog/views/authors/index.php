@@ -13,3 +13,5 @@ Hello, I am the Authors Index veiw.
         </tr>
     <?php endforeach ?>
 </table>
+
+<a href="/authors/create">[Create]</a>

@@ -18,7 +18,9 @@ class AuthorsController extends BaseController
     // Method Action create
     public function create()
     {
-        $this->renderView("create");
+        if($this->isPost){
+            // TODO:save user in DB
+        }
     }
 
     public function delete()
