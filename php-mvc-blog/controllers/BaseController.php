@@ -30,14 +30,14 @@ abstract class BaseController
             $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
             if($includeLayout){
-                $headerFile='views/layout/'.$this->layoutName.'header.php';
+                $headerFile='views/layout/'.$this->layoutName.'/header.php';
                 include_once($headerFile);
             }
 
             include_once($viewFileName);
 
             if($includeLayout){
-                $footerFile='views/layout/'.$this->layoutName.'footer.php';
+                $footerFile='views/layout/'.$this->layoutName.'/footer.php';
                 include_once($footerFile);
             }
 
