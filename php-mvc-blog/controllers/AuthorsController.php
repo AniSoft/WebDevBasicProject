@@ -2,26 +2,25 @@
 
 class AuthorsController extends BaseController
 {
-    private $model;
+    private $db;
     public function onInit()
     {
         $this->title = "Authors";
-        $this->model=new AuthorsMOdel();
+        $this->db=new AuthorsMOdel();
     }
 
     // Presentation Logic
     public function index()
     {
-        $model=new AuthorsModel();
-        $this->authors= $model->getAll();
-
+        $this->authors= $this->db->getAll();
     }
 
     // Method Action create
     public function create()
     {
         if($this->isPost){
-            // TODO:save user in DB
+            $name=$_POST['name'];
+            $this->author=$this->db->createaAuthor($name);
         }
     }
 
