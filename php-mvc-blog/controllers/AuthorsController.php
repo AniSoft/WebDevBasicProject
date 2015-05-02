@@ -2,9 +2,11 @@
 
 class AuthorsController extends BaseController
 {
+    private $model;
     public function onInit()
     {
-        $this->title = "Pesho";
+        $this->title = "Authors";
+        $this->model=new AuthorsMOdel();
     }
 
     // Presentation Logic

@@ -13,6 +13,17 @@ http://code.tutsplus.com/tutorials/the-ultimate-guide-to-htaccess-files--net-475
 mod_rewrite
 http://code.tutsplus.com/tutorials/an-in-depth-guide-to-mod_rewrite-for-apache--net-6708
 
+FREE
+https://www.openshift.com/ - php, java, nodejs, ruby, python, perl,mysql + phpmyadmin.
+
+https://www.heroku.com/ - php, ruby, python, java è nodejs. addon,mysql
+
+https://appharbor.com/ - like heroku, for .net
+
+http://www.000webhost.com/ - PHP hosting and ftp 
+
+
+
 
 
 
