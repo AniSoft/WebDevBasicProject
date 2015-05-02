@@ -18,3 +18,6 @@
             <li><a href="/books">Books</a></li>
         </ul>
     </header>
+
+<?php include('messages.php')?>
+

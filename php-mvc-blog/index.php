@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once('includes/config.php');
 
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

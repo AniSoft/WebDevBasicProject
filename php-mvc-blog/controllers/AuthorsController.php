@@ -27,13 +27,18 @@ class AuthorsController extends BaseController
             } else {
                 $this->addInfoMessage("Error creating Author.");
             }
-            $this->redirect('authors');
+
         }
     }
 
     public function delete($id)
     {
-        $this->db->deleteAuthor($id);
+        if($this->db->deleteAuthor($id)){
+            $this->addInfoMessage("Author deleted.");
+        }else{
+            $this->addErrorMessage("Cannot delete author.");
+        }
+
         $this->redirect('authors');
     }
 }
