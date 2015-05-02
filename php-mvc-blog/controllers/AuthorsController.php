@@ -19,15 +19,15 @@ class AuthorsController extends BaseController
     public function create()
     {
         if($this->isPost){
-            $name=$_POST['name'];
+            $name=$_POST['author_name'];
             $this->author=$this->db->createaAuthor($name);
+            $this->redirect('authors');
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
-        $this->renderView("index");
+        $this->db->deleteAuthor($id);
     }
-
 }
 

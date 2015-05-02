@@ -48,4 +48,22 @@ abstract class BaseController
             $this->isViewRendered=true;
         }
     }
+
+    // Method
+    public function redirectToUrl($url){
+        header("Location: ".$url);
+        die;
+    }
+
+    public function redirect($controllerName,$actionName=null,$params=null){
+        $url='/'.urlencode($controllerName);
+        if($actionName !=null){
+            $url .='.'.urlencode($actionName);
+        }
+        if($params !=null ){
+            $encodedParams=array_map($params,'urlencode');
+            $url.=implode('/',$encodedParams);
+        }
+        $this->redirectToUrl($url);
+    }
 }
