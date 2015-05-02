@@ -1,6 +1,6 @@
 <?php
 
-class AuthorModel extends BaseModel
+class AuthorsModel extends BaseModel
 {
     public function getAll()
     {
@@ -14,7 +14,6 @@ class AuthorModel extends BaseModel
         if ($name == '') {
             return false;
         }
-
         $statement = self::$db->prepare(
             "INSERT INTO authors VALUES(NULL, ?)");
         $statement->bind_param("s", $name);
@@ -23,10 +22,10 @@ class AuthorModel extends BaseModel
         return $statement->affected_rows > 0;
     }
 
-    public function deleteAuthor($name)
+    public function deleteAuthor($id)
     {
         $statement = self::$db->prepare(
-            "DELETE FROM authors WHERE id=?");
+            "DELETE FROM authors WHERE id = ?");
         $statement->bind_param("i", $id);
         $statement->execute();
 

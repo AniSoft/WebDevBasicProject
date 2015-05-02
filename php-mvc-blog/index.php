@@ -3,8 +3,7 @@ session_start();
 
 require_once('includes/config.php');
 
-$requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$requestParts = explode('/', $requestPath);
+$requestParts = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 // Parse Controller name
 $controllerName = DEFAULT_CONTROLLER;
@@ -26,7 +25,7 @@ $controllerFileName = "controllers/" . $controllerClassName . '.php';
 
 // Create controller
 if (class_exists($controllerClassName)) {
-    $controller = new $controllerClassName($controllerName,$action);
+    $controller = new $controllerClassName($controllerName, $action);
 } else {
     die("Cannot find controller '$controllerName' in class '$controllerFileName'");
 }
@@ -43,8 +42,7 @@ if (method_exists($controller, $action)) {
 // Rending View
 $controller->renderView();
 
-function __autoload($class_name)
-{
+function __autoload($class_name) {
     if (file_exists("controllers/$class_name.php")) {
         include "controllers/$class_name.php";
     }

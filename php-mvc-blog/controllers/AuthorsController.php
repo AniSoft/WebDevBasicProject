@@ -1,45 +1,35 @@
 <?php
 
-class AuthorsController extends BaseController
-{
+class AuthorsController extends BaseController {
     private $db;
 
-    public function onInit()
-    {
+    public function onInit() {
         $this->title = "Authors";
-        $this->db = new AuthorsMOdel();
+        $this->db = new AuthorsModel();
     }
 
-    // Presentation Logic
-    public function index()
-    {
+    public function index() {
         $this->authors = $this->db->getAll();
     }
 
-    // Method Action create
-    public function create()
-    {
+    public function create() {
         if ($this->isPost) {
             $name = $_POST['author_name'];
-
-            if ($this->db->createaAuthor($name)) {
+            if ($this->db->createAuthor($name)) {
                 $this->addInfoMessage("Author created.");
+                $this->redirect('authors');
             } else {
-                $this->addInfoMessage("Error creating Author.");
+                $this->addErrorMessage("Error creating author.");
             }
-
         }
     }
 
-    public function delete($id)
-    {
-        if($this->db->deleteAuthor($id)){
+    public function delete($id) {
+        if ($this->db->deleteAuthor($id)) {
             $this->addInfoMessage("Author deleted.");
-        }else{
+        } else {
             $this->addErrorMessage("Cannot delete author.");
         }
-
         $this->redirect('authors');
     }
 }
-
