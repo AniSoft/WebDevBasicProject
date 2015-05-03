@@ -3,15 +3,14 @@
 abstract class BaseController
 {
     protected $controllerName;
-    protected $actionName;
     protected $layoutName = DEFAULT_LAYOUT;
     protected $isViewRendered = false;
     protected $isPost = false;
 
-    function __construct($controllerName, $actionName)
+    function __construct($controllerName)
     {
         $this->controllerName = $controllerName;
-        $this->actionName = $actionName;
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->isPost = true;
         }
@@ -28,12 +27,9 @@ abstract class BaseController
         // Implement the default action in the subclasses
     }
 
-    public function renderView($viewName = null, $includeLayout = true)
+    public function renderView($viewName = "Index", $includeLayout = true)
     {
         if (!$this->isViewRendered) {
-            if ($viewName == null) {
-                $viewName = $this->actionName;
-            }
             $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
             if ($includeLayout) {

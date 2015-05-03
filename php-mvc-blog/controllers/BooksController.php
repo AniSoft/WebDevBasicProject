@@ -10,7 +10,7 @@ class BooksController extends BaseController
     // Presentation Logic
     public function index()
     {
-
+        $this->renderView();
     }
 }
 

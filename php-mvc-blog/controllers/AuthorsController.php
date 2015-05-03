@@ -4,13 +4,14 @@ class AuthorsController extends BaseController {
     private $db;
 
     public function onInit() {
-        parent::_construct();
+
         $this->title = "Authors";
         $this->db = new AuthorsModel();
     }
 
     public function index() {
         $this->authors = $this->db->getAll();
+        $this->renderView();
     }
 
     public function create() {
@@ -24,7 +25,7 @@ class AuthorsController extends BaseController {
             }
         }
 
-        $this->renderView();
+        $this->renderView(__FUNCTION__);
     }
 
     public function delete($id) {
@@ -34,5 +35,6 @@ class AuthorsController extends BaseController {
             $this->addErrorMessage("Cannot delete author.");
         }
         $this->redirect('authors');
+        $this->renderView(__FUNCTION__);
     }
 }
