@@ -1,3 +1,4 @@
+<h1>Register</h1>
 <form action="/account/register" method="POST">
     <label for="username">Username:</label>
     <input id="username" type="text" name="username"/>
@@ -6,5 +7,6 @@
     <input id="password" type="password" name="password"/>
     <br/>
     <input type="submit" value="Register"/>
+    <a href="/account/login">Go login</a>
 </form>
 
