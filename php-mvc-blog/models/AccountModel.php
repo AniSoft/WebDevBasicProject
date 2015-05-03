@@ -26,6 +26,15 @@ class AccountModel extends BaseModel
 
     public function login($username, $password)
     {
+        $statement = self::$db->prepare("SELECT Id,username,pass_hash FROM Users WHERE Username=?");
+        $statement->bind_param("s", $username);
+        $statement->execute();
+        $result = $statement->get_result()->fetch_assoc();
+
+        var_dump($result);
+        if ($result['COUNT(Id)']) {
+            return false;
+        }
 
     }
 }

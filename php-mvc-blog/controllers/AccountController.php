@@ -32,6 +32,7 @@ class AccountController extends BaseController
 
     public function login()
     {
+
         $this->renderView(__FUNCTION__);
     }
 
