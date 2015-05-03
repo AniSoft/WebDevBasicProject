@@ -4,6 +4,7 @@ class AuthorsController extends BaseController {
     private $db;
 
     public function onInit() {
+        parent::_construct();
         $this->title = "Authors";
         $this->db = new AuthorsModel();
     }
@@ -22,6 +23,8 @@ class AuthorsController extends BaseController {
                 $this->addErrorMessage("Error creating author.");
             }
         }
+
+        $this->renderView();
     }
 
     public function delete($id) {
