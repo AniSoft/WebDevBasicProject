@@ -11,9 +11,13 @@ class BooksController extends BaseController
     }
 
     // Presentation Logic
-    public function index()
+    public function index($page,$pageSize)
     {
+        $page=$_GET['page'];
+        $pageSize=$_GET['pageSize'];
+
         $this->authorize();
+        $this->books=$this->db->getAll();
         $this->renderView();
     }
 

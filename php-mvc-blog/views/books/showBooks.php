@@ -1,9 +1,9 @@
 <div>
     <ul>
-        <?php foreach($this->$books as $book):?>
+        <?php foreach ($this->$books as $book): ?>
             <li>
-                <?php echo $book[0];?>
+                <?php echo $book[0]; ?>
             </li>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </ul>
 </div>
