@@ -1,7 +1,9 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Anita
- * Date: 4.5.2015 г.
- * Time: 21:08
- */
+<div>
+    <ul>
+        <?php foreach($this->$books as $book):?>
+            <li>
+                <?php echo $book[0];?>
+            </li>
+        <?php endforeach;?>
+    </ul>
+</div>
