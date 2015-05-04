@@ -16,6 +16,10 @@
         <li><a href="/authors">Authors</a></li>
         <li><a href="/books">Books</a></li>
     </ul>
+    <div id="logged-in-info">
+        <span>Hello, username</span>
+        <form action="/account/logout"><input type="submit" value="Logout"/></form>
+    </div>
 </header>
 
 <?php include('messages.php'); ?>

@@ -31,10 +31,10 @@ class AccountModel extends BaseModel
         $statement->execute();
         $result = $statement->get_result()->fetch_assoc();
 
-        var_dump($result);
-        if ($result['COUNT(Id)']) {
-            return false;
+        if(password_verify($password,$result['pass_hash'])){
+           return true;
         }
 
+        return false;
     }
 }
