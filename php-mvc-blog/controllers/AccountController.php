@@ -32,6 +32,7 @@ class AccountController extends BaseController
         $this->renderView(__FUNCTION__);
     }
 
+    // Action
     public function login()
     {
         if($this->isPost){
