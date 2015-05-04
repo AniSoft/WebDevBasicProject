@@ -2,9 +2,11 @@
 
 class BooksController extends BaseController
 {
+    private $db;
     public function onInit()
     {
         $this->title = "Books";
+        $this->db=new BooksMOdel();
     }
 
     // Presentation Logic
@@ -12,6 +14,11 @@ class BooksController extends BaseController
     {
         $this->authorize();
         $this->renderView();
+    }
+
+    // Method
+    public function showBooks(){
+
     }
 }
 
