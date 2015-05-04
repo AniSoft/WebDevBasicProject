@@ -4,14 +4,13 @@
 
 <button id="show-books">Show books</button>
 <div id="books"></div>
-
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
-    $('#show-books').on.('click',function(ev){
+    $('#show-books').on('click', function (ev) {
         $.ajax({
-            url:'/books/showBooks',
-            method:'GET'
-        }).success(function(data){
+            url: '/books/showBooks',
+            method: 'GET'
+        }).success(function (data) {
             $('#books').html(data);
         })
     })
