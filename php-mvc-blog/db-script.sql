@@ -1,3 +1,5 @@
+-- mysql -u root -p
+
 CREATE DATABASE  IF NOT EXISTS `mvc` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mvc`;
 -- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
@@ -5,7 +7,6 @@ USE `mvc`;
 -- Host: localhost    Database: mvc
 -- ------------------------------------------------------
 -- Server version	5.6.21
--- ------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -81,7 +82,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
-  `pass_hash` varchar(45) NOT NULL,
+  `pass_hash` char(60) NOT NULL,
   `is_admin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)

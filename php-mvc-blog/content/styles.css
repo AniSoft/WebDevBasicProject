@@ -3,7 +3,7 @@ body > header {
     padding: 5px;
 }
 
-body > header >a> img, body > header ul, body > header ul > li {
+body > header > a > img, body > header ul, body > header ul > li {
     display: inline-block;
     vertical-align: middle;
 }
@@ -14,18 +14,18 @@ body > footer {
     text-align: center;
 }
 
-li.info{
-    background:#7f7;
+li.info {
+    background: #7f7;
 }
 
-li.error{
-    background:#f77;
+li.error {
+    background: #f77;
 }
 
-#logged-in-info{
-    float:right;
+#logged-in-info {
+    float: right;
 }
 
-#logged-in-info form{
-    display:inline-block;
+#logged-in-info form {
+    display: inline-block;
 }

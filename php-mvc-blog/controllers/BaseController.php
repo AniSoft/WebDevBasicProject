@@ -10,17 +10,15 @@ abstract class BaseController
     protected $validationErrors;
     protected $formValues;
 
-
     function __construct($controllerName)
     {
         $this->controllerName = $controllerName;
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->isPost = true;
         }
 
-        if(isset($_SESSION['username'])){
-            $this->isLoggedIn=true;
+        if (isset($_SESSION['username'])) {
+            $this->isLoggedIn = true;
         }
 
         $this->onInit();
@@ -39,6 +37,7 @@ abstract class BaseController
     public function renderView($viewName = "Index", $includeLayout = true)
     {
         if (!$this->isViewRendered) {
+
             $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
             if ($includeLayout) {
@@ -60,8 +59,7 @@ abstract class BaseController
         die;
     }
 
-    public function redirect(
-        $controllerName, $actionName = null, $params = null)
+    public function redirect($controllerName, $actionName = null, $params = null)
     {
         $url = '/' . urlencode($controllerName);
         if ($actionName != null) {
@@ -74,36 +72,32 @@ abstract class BaseController
         $this->redirectToUrl($url);
     }
 
-    public function authorize(){
-        if(!$this->isLoggedIn){
-            $this->addErrorMessage("Please login first.");
-            $this->redirect("account","login");
+    public function authorize()
+    {
+        if (!$this->isLoggedIn) {
+            $this->addErrorMessage("Please login first");
+            $this->redirect("account", "login");
         }
     }
 
-    public function addValidationError($field,$message){
-        $this->validationErrors[$field]=$message;
+    public function addValidationError($field, $message)
+    {
+        $this->validationErrors[$field] = $message;
     }
 
-    public function getValidationError($field){
+    public function getValidationError($field)
+    {
         return $this->validationErrors[$field];
     }
 
-    public function addFieldValue($field,$value){
-        $this->formValues[$field]=$value;
-    }
-
-    public function getFieldValue($field){
-        return $this->formValues[$field];
-    }
-
-    function addMessage($msg, $type)
+    public function addFieldValue($field, $value)
     {
-        if (!isset($_SESSION['messages'])) {
-            $_SESSION['messages'] = array();
-        };
-        array_push($_SESSION['messages'],
-            array('text' => $msg, 'type' => $type));
+        $this->formValues[$field] = $value;
+    }
+
+    public function getFieldValue($field)
+    {
+        return $this->formValues[$field];
     }
 
     function addInfoMessage($msg)
@@ -114,5 +108,14 @@ abstract class BaseController
     function addErrorMessage($msg)
     {
         $this->addMessage($msg, 'error');
+    }
+
+    function addMessage($msg, $type)
+    {
+        if (!isset($_SESSION['messages'])) {
+            $_SESSION['messages'] = array();
+        };
+        array_push($_SESSION['messages'],
+            array('text' => $msg, 'type' => $type));
     }
 }
