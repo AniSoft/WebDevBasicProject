@@ -21,7 +21,7 @@ class AccountController extends BaseController
             $password = $_POST['password'];
             $isRegistered = $this->db->register($username, $password);
             if ($isRegistered) {
-                // TODO: Add username in session
+                $_SESSION['username']=$username;
                 $this->addInfoMessage("Successful registration!");
                 $this->redirect("books", "index");
             } else {
@@ -39,14 +39,13 @@ class AccountController extends BaseController
             $password=$_POST['password'];
             $isLoggedIn=$this->db->login($username,$password);
             if($isLoggedIn){
-                // TODO: Add username in session
+                $_SESSION['username']=$username;
                 $this->addInfoMessage("Successful login!");
                 $this->redirect("books","index");
             }else{
                 $this->addErrorMessage("Login error");
                 $this->redirect("account","login");
             }
-
         }
 
         $this->renderView(__FUNCTION__);
