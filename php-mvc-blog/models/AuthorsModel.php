@@ -18,7 +18,6 @@ class AuthorsModel extends BaseModel
             "INSERT INTO authors VALUES(NULL, ?)");
         $statement->bind_param("s", $name);
         $statement->execute();
-
         return $statement->affected_rows > 0;
     }
 
@@ -28,7 +27,6 @@ class AuthorsModel extends BaseModel
             "DELETE FROM authors WHERE id = ?");
         $statement->bind_param("i", $id);
         $statement->execute();
-
         return $statement->affected_rows > 0;
     }
 }
