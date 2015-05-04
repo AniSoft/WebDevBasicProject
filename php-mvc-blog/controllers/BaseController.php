@@ -8,6 +8,7 @@ abstract class BaseController
     protected $isPost = false;
     protected $isLoggedIn;
     protected $validationErrors;
+    protected $formValues;
 
 
     function __construct($controllerName)
@@ -86,6 +87,14 @@ abstract class BaseController
 
     public function getValidationError($field){
         return $this->validationErrors[$field];
+    }
+
+    public function addFieldValue($field,$value){
+        $this->formValues[$field]=$value;
+    }
+
+    public function getFieldValue($field){
+        return $this->formValues[$field];
     }
 
     function addMessage($msg, $type)

@@ -21,6 +21,7 @@ class AuthorsController extends BaseController {
         if ($this->isPost) {
             $name = $_POST['author_name'];
             if(strlen($name)<2){
+                $this->addFieldValue('author_name',$name);
                 $this->addValidationError('author_name','The author name length should be greater than 2');
                 return $this->renderView(__FUNCTION__);
             }
