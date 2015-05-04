@@ -1,31 +1,35 @@
 <?php
 
-class BooksController extends BaseController
-{
+class BooksController extends BaseController {
     private $db;
 
-    public function onInit()
-    {
-        $this->title = "Books";
+    function __construct() {
+        parent::__construct("Books");
         $this->db = new BooksModel();
     }
 
-    public function index($page = 0, $pageSize = 10)
-    {
+    public function index() {
         $this->authorize();
 
-        $from = $page * $pageSize;
-        $this->page = $page;
-        $this->pageSize = $pageSize;
+        $this->books = $this->db->getAll();
 
-        $this->books = $this->db->getFilteredBooks($from, $pageSize);
-
-        $this->renderView();
+        $this->renderView(__FUNCTION__, false);
     }
 
-    public function showBooks()
-    {
-        $this->books = $this->db->getAll();
-        $this->renderView(__FUNCTION__, false);
+    public function all() {
+        $this->page = 0;
+        $this->pageSize = 10;
+        if (isset($_GET['page'])) {
+            $this->page = $_GET['page'];
+        }
+
+        if (isset($_GET['pageSize'])) {
+            $this->pageSize = $_GET['pageSize'];
+        }
+
+        $from = $this->page * $this->pageSize;
+        $to = $from + $this->pageSize;
+        $this->books = $this->db->getAllWithLimit($from, $to);
+        $this->renderView(__FUNCTION__);
     }
 }

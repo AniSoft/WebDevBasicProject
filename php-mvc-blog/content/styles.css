@@ -1,14 +1,15 @@
-body > header {
+body>header {
     background: #eee;
     padding: 5px;
 }
 
-body > header > a > img, body > header ul, body > header ul > li {
+body>header>a>img, body>header ul, body>header ul>li  {
     display: inline-block;
     vertical-align: middle;
 }
 
-body > footer {
+
+body>footer {
     background: #eee;
     padding: 5px;
     text-align: center;
@@ -22,10 +23,10 @@ li.error {
     background: #f77;
 }
 
-#logged-in-info {
-    float: right;
+#logged-in-username {
+    float:right;
 }
 
-#logged-in-info form {
+#logged-in-username form {
     display: inline-block;
 }

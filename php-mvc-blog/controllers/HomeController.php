@@ -1,10 +1,7 @@
 <?php
 
-class HomeController extends BaseController
-{
-
-    public function index()
-    {
-        $this->renderView(__FUNCTION__);
+class HomeController extends BaseController {
+    function index() {
+        $this-> renderView();
     }
 }

@@ -1,17 +1,14 @@
 <?php
 
-class AuthorsController extends BaseController
-{
+class AuthorsController extends BaseController {
     private $db;
 
-    public function onInit()
-    {
-        $this->title = "Authors";
+    function __construct() {
+        parent::__construct("Authors");
         $this->db = new AuthorsModel();
     }
 
-    public function index()
-    {
+    public function index() {
         $this->authorize();
 
         $this->authors = $this->db->getAll();
@@ -19,8 +16,7 @@ class AuthorsController extends BaseController
         $this->renderView();
     }
 
-    public function create()
-    {
+    public function create() {
         $this->authorize();
 
         if ($this->isPost) {
@@ -38,12 +34,10 @@ class AuthorsController extends BaseController
                 $this->addErrorMessage("Error creating author.");
             }
         }
-
         $this->renderView(__FUNCTION__);
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $this->authorize();
 
         if ($this->db->deleteAuthor($id)) {
@@ -51,6 +45,7 @@ class AuthorsController extends BaseController
         } else {
             $this->addErrorMessage("Cannot delete author.");
         }
+
         $this->redirect('authors');
     }
 }

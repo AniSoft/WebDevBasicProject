@@ -1,61 +1,59 @@
 <?php
 
-class AccountController extends BaseController
-{
-    private $db;
-
-    public function onInit()
-    {
-        $this->db = new AccountModel();
+class AccountController extends BaseController {
+    private $model;
+    function __construct() {
+        parent::__construct("Account");
+        $this->model = new AccountModel();
     }
 
-    public function register()
-    {
-        if ($this->isPost) {
+    public function register() {
+        if($this->isPost) {
             $username = $_POST['username'];
-            if ($username == null || strlen($username) < 3) {
-                $this->addErrorMessage("Username is invalid!");
-                $this->redirect("account", "register");
+            $password = $_POST['password'];
+            $registrationSuccess = $this->model->register($username, $password);
+            if($registrationSuccess) {
+                $_SESSION['username'] = $username;
+                $this->addInfoMessage("Successful registration");
+            }
+            else {
+                $this->addErrorMessage("Registration error!");
             }
 
+            $this->redirect("authors");
+        }
+
+        $this->renderView(__FUNCTION__);
+    }
+
+    public function login() {
+        if($this->isPost) {
+            $username = $_POST['username'];
             $password = $_POST['password'];
-            $isRegistered = $this->db->register($username, $password);
-            if ($isRegistered) {
+            $loginSuccess = $this->model->login($username, $password);
+            if ($loginSuccess) {
                 $_SESSION['username'] = $username;
-                $this->addInfoMessage("Successful registration!");
-                $this->redirect("books", "index");
-            } else {
-                $this->addErrorMessage("Register failed!");
+                $this->addInfoMessage("Login success");
+                $this->redirect("authors");
+            }
+            else {
+                $this->addErrorMessage("Login error");
+                $this->redirect("account", "login");
             }
         }
 
         $this->renderView(__FUNCTION__);
     }
 
-    public function login()
-    {
-        if ($this->isPost) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $isLoggedIn = $this->db->login($username, $password);
-            if ($isLoggedIn) {
-                $_SESSION['username'] = $username;
-                $this->addInfoMessage("Successful login!");
-                return $this->redirect("books", "index");
-            } else {
-                $this->addErrorMessage("Login error!");
-            }
-        }
-
-        $this->renderView(__FUNCTION__);
-    }
-
-    public function logout()
-    {
+    public function logout() {
         $this->authorize();
 
-        unset($_SESSION['username']);
-        $this->addInfoMessage("Bye pich!");
-        $this->redirectToUrl("/");
+        var_dump($this->isPost);
+        if($this->isPost) {
+            session_destroy();
+            session_start();
+            $this->addInfoMessage("You are logged out!");
+            $this->redirect("Home");
+        }
     }
 }
