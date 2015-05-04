@@ -18,7 +18,8 @@ class BooksController extends BaseController
 
     // Method
     public function showBooks(){
-
+        $books=$this->db->getAll();
+        $this->renderView(__FUNCTION__);
     }
 }
 
