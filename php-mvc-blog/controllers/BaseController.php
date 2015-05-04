@@ -7,6 +7,7 @@ abstract class BaseController
     protected $isViewRendered = false;
     protected $isPost = false;
     protected $isLoggedIn;
+    protected $validationErrors;
 
 
     function __construct($controllerName)
@@ -79,6 +80,13 @@ abstract class BaseController
         }
     }
 
+    public function addValidationError($field,$message){
+        $this->validationErrors[$field]=$message;
+    }
+
+    public function getValidationError($field){
+        return $this->validationErrors[$field];
+    }
 
     function addMessage($msg, $type)
     {

@@ -7,24 +7,26 @@ class BooksController extends BaseController
     public function onInit()
     {
         $this->title = "Books";
-        $this->db=new BooksModel();
+        $this->db = new BooksModel();
     }
 
     // Presentation Logic
-    public function index($page,$pageSize)
+    public function index($page = 0, $pageSize = 10)
     {
-        $page=$_GET['page'];
-        $pageSize=$_GET['pageSize'];
-
         $this->authorize();
-        $this->books=$this->db->getAll();
+
+        $from = $page * $pageSize;
+        $this->page = $page;
+        $this->pageSize = $pageSize;
+
+        $this->books = $this->db->getFilteredBooks($from, $pageSize);
         $this->renderView();
     }
 
     // Method
-    public function showBooks(){
-        $this->$books=$this->db->getAll();
-        $this->renderView(__FUNCTION__,false);
+    public function showBooks()
+    {
+        $this->$books = $this->db->getAll();
+        $this->renderView(__FUNCTION__, false);
     }
 }
-

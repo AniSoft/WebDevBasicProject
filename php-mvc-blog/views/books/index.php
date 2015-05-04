@@ -11,3 +11,5 @@
         </tr>
     <?php endforeach ?>
 </table>
+<a href="/books/index/<?=$this->page-1 ?>/<?=$this->pageSize ?>">Previous</a>
+<a href="/books/index/<?=$this->page+1 ?>/<?=$this->pageSize ?>">Next</a>
