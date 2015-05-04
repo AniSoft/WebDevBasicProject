@@ -41,10 +41,9 @@ class AccountController extends BaseController
             if($isLoggedIn){
                 $_SESSION['username']=$username;
                 $this->addInfoMessage("Successful login!");
-                $this->redirect("books","index");
+                return $this->redirect("books","index");
             }else{
                 $this->addErrorMessage("Login error");
-                $this->redirect("account","login");
             }
         }
 
@@ -53,7 +52,10 @@ class AccountController extends BaseController
 
     public function logout()
     {
-
+        $this->authorize();
+        unset( $_SESSION['username']);
+        $this->addInfoMessage("Successful logout.");
+        $this->redirectToUrl("/");
     }
 
 }
