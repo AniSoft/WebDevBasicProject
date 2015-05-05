@@ -1,35 +1,35 @@
 <?php
 
-class AccountModel extends BaseModel
-{
-    public function register($username, $password)
-    {
-        $statement = self::$db->prepare("SELECT COUNT(Id) FROM Users WHERE Username = ?");
+class AccountModel extends BaseModel {
+    public function __construct() {
+        parent::__construct();
+        session_set_cookie_params(1800,"/");
+    }
+
+    public function register($username, $password) {
+        $statement = $this->db->prepare("SELECT Id FROM users WHERE username = ?");
         $statement->bind_param("s", $username);
         $statement->execute();
-        $result = $statement->get_result()->fetch_assoc();
-        var_dump($result['COUNT(Id)']);
-        if ($result['COUNT(Id)']) {
+        $result = $statement->get_result();
+        if($result->fetch_all()) {
             return false;
         }
 
-        $hash_pass = password_hash($password, PASSWORD_BCRYPT);
-
-        $registerStatement = self::$db->prepare("INSERT INTO Users (username, pass_hash) VALUES (?, ?)");
-        $registerStatement->bind_param("ss", $username, $hash_pass);
-        $registerStatement->execute();
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $statement2 = $this->db->prepare("INSERT INTO users (username, pass_hash) VALUES (?, ?)");
+        $statement2->bind_param("ss", $username, $password_hash);
+        $statement2->execute();
 
         return true;
     }
 
-    public function login($username, $password)
-    {
-        $statement = self::$db->prepare("SELECT Id, username, pass_hash FROM Users WHERE Username = ?");
+    public function login($username, $password) {
+        $statement = $this->db->prepare("SELECT Id, username, pass_hash FROM users WHERE username = ?");
         $statement->bind_param("s", $username);
         $statement->execute();
-        $result = $statement->get_result()->fetch_assoc();
-
-        if (password_verify($password, $result['pass_hash'])) {
+        $result = $statement->get_result();
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['pass_hash'])) {
             return true;
         }
 
