@@ -1,20 +1,15 @@
 <?php
 
-class BooksModel extends BaseModel
-{
-    public function getAll()
-    {
-        $statement = self::$db->query("SELECT id, title FROM books");
-        $result = $statement->fetch_all();
-        return $result;
+class BooksModel extends BaseModel {
+    public function getAll() {
+        $statement = $this->db->query("SELECT * FROM Books ORDER BY Title");
+        return $statement->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getFilteredBooks($from, $size)
-    {
-        $statement = self::$db->prepare("SELECT id, title FROM books LIMIT ?, ?");
-        $statement->bind_param("ii", $from, $size);
+    public function getAllWithLimit($from, $to) {
+        $statement = $this->db->prepare("SELECT * FROM Books ORDER BY Title LIMIT ?,?");
+        $statement->bind_param("ii", $from, $to);
         $statement->execute();
-        $result = $statement->get_result()->fetch_all();
-        return $result;
+        return $statement->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
