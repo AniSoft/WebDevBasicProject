@@ -1,7 +1,9 @@
 <?php
-
 require_once('application.php');
 require_once('/includes/config.php');
+
+include_once '/library/phpLib/Paging/Zebra_Pagination.php';
+include_once '/library/phpLib/Validator/Validator.php';
 
 session_start();
 $app = Application::getInstance();
