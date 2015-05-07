@@ -1,6 +1,6 @@
 body>header {
-    background: #eee;
-    padding: 5px;
+    background: #ffffff;
+    padding: 10px;
 }
 
 body>header>a>img, body>header ul, body>header ul>li  {
@@ -10,7 +10,7 @@ body>header>a>img, body>header ul, body>header ul>li  {
 
 body>footer {
     background: #eee;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -34,4 +34,8 @@ img{
     margin-left:10px;
     margin-top:10px;
     padding: 0px;
+}
+
+#period{
+    padding: 10px;
 }
