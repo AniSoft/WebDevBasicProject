@@ -3,20 +3,20 @@
         <fieldset>
             <legend>Edit Question</legend>
             <div class="form-group">
-                <label for="inputTitle" class="col-lg-3 control-label">Title</label>
+                <label for="inputTitle" class="col-lg-3 control-label">Title :</label>
                 <div class="col-lg-5">
                     <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Title" value="<?= $this->questionInfo['Title'] ?>" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputText" class="col-lg-3 control-label">Content</label>
+                <label for="inputText" class="col-lg-3 control-label">Content :</label>
                 <div class="col-lg-5">
                     <textarea class="form-control" rows="3" id="inputText" name="content"  required><?= $this->questionInfo['Content'] ?></textarea>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="selectCat" class="col-lg-3 control-label">Category</label>
+                <label for="selectCat" class="col-lg-3 control-label">Category :</label>
                 <div class="col-lg-5">
                     <select class="form-control" id="selectCat" name="selectCategory" onselect="<?= $this->questionInfo['Category'] ?>" required>
                         <?php foreach($this->TagsAndCategories["categories"] as $cat) : ?>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <label class="col-lg-3 control-label">Tags</label>
+                <label class="col-lg-3 control-label">Tags :</label>
                 <div class="col-lg-5">
                     <?php foreach($this->TagsAndCategories["tags"] as $tag) : ?>
                         <div class="checkbox">

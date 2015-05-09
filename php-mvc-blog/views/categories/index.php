@@ -1,7 +1,8 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3 well">
+    <div class="col-md-4 col-md-offset-4 well">
         <div class="row">
-            <h1 class="col-md-3"><?= htmlspecialchars($this->title) ?></h1>
+            <legend><?= htmlspecialchars($this->title) ?></legend>
+
             <?php if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == true) :  ?>
             <div class="col-md-3 col-md-offset-6">
                 <a href="/categories/add" class="btn btn-primary">Add Category</a>
