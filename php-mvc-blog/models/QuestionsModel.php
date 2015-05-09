@@ -1,7 +1,9 @@
 <?php
 
-class QuestionsModel extends BaseModel {
-    public function getAll(){
+class QuestionsModel extends BaseModel
+{
+    public function getAll()
+    {
         $data = self::$db->query(
             "SELECT
                 q.Id,
@@ -14,10 +16,12 @@ class QuestionsModel extends BaseModel {
             left join categories c on q.Category=c.Id
             left join users u on q.User=u.Id
             ORDER BY Date DESC");
+
         return $data->fetch_all(MYSQL_ASSOC);
     }
 
-    public function getMaxCount($category){
+    public function getMaxCount($category)
+    {
         $query = sprintf(
             "SELECT COUNT(q.Id) as maxCount
             FROM questions q
@@ -27,9 +31,12 @@ class QuestionsModel extends BaseModel {
             ORDER BY Date DESC",
             addslashes($category));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
-    public function getAllWithPageAndCategory($from, $pageSize, $category){
+
+    public function getAllWithPageAndCategory($from, $pageSize, $category)
+    {
         $query = sprintf(
             "SELECT
                 q.Id,
@@ -49,10 +56,12 @@ class QuestionsModel extends BaseModel {
             addslashes($from),
             addslashes($pageSize));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 
-    public function getMaxCountAnswer($id){
+    public function getMaxCountAnswer($id)
+    {
         $query = sprintf(
             "SELECT COUNT(a.Id) as maxCount
             FROM questions q
@@ -62,11 +71,12 @@ class QuestionsModel extends BaseModel {
             where q.id = %s",
             addslashes($id));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 
-    public function getByIdWithAnswer($id, $from, $pageSize){
-
+    public function getByIdWithAnswer($id, $from, $pageSize)
+    {
         $queryUpdate = sprintf("Update questions Set Counter = Counter + 1 Where Id = %s", $id);
         $dataUpdate = self::$db->query($queryUpdate);
 
@@ -106,12 +116,12 @@ class QuestionsModel extends BaseModel {
         $data = self::$db->query($query);
         $tagsFetch = $this->process_results($data);
         $dataWithTags[0]['Tags'] = $tagsFetch[0]['Tags'];
-        return $dataWithTags;
 
+        return $dataWithTags;
     }
 
-    public function getAllByUserId($id){
-
+    public function getAllByUserId($id)
+    {
         $queryQuestion = sprintf(
             "SELECT
                 q.Id
@@ -119,11 +129,12 @@ class QuestionsModel extends BaseModel {
             where q.User = %s",
             addslashes($id));
         $dataQuestion = self::$db->query($queryQuestion);
+
         return $this->process_results($dataQuestion);
     }
 
-    public function getAllTagsAndCategories(){
-
+    public function getAllTagsAndCategories()
+    {
         $categories = self::$db->query("SELECT * FROM categories");
         $categoriesFetch = $this->process_results($categories);
 
@@ -135,10 +146,10 @@ class QuestionsModel extends BaseModel {
         $union['tags'] = $tagsFetch;
 
         return $union;
-
     }
 
-    public function add($title, $content, $categoryId, $tags){
+    public function add($title, $content, $categoryId, $tags)
+    {
         $queryUser = sprintf("SELECT Id FROM users WHERE username = '%s'", $_SESSION['username']);
         $data = self::$db->query($queryUser);
         $user = $this->process_results($data);
@@ -151,7 +162,7 @@ class QuestionsModel extends BaseModel {
         $data = self::$db->query($query);
         $questionId = self::$db->insert_id;
 
-        if($questionId > 0){
+        if ($questionId > 0) {
             foreach ($tags as $tag) {
                 $query = sprintf(
                     "INSERT INTO questions_tags (questionId, tagId)
@@ -159,15 +170,15 @@ class QuestionsModel extends BaseModel {
                     addslashes($questionId), addslashes($tag));
                 $data = self::$db->query($query);
             }
-        }
-        else{
+        } else {
             return false;
         }
 
         return $questionId;
     }
 
-    public function getInfo($id){
+    public function getInfo($id)
+    {
         $query = sprintf(
             "SELECT q.Title as Title, q.Content as Content, c.Title as Category
             FROM questions q JOIN categories c ON q.Category = c.Id WHERE q.Id = %s",
@@ -185,18 +196,19 @@ class QuestionsModel extends BaseModel {
         $dataTags = self::$db->query($queryTags);
         $tags = $this->process_results($dataTags);
         $tagsArr = array();
-        foreach ($tags as $t){
+        foreach ($tags as $t) {
             $tagsArr[] = $t['Title'];
         }
         $result[0]['Tags'] = $tagsArr;
         return $result[0];
     }
 
-    public function edit($id, $title, $content, $categoryId, $tags){
+    public function edit($id, $title, $content, $categoryId, $tags)
+    {
         $query = sprintf("UPDATE questions SET Title= '%s', Content = '%s', Category = %s WHERE Id = %s",
             addslashes($title), addslashes($content), addslashes($categoryId), addslashes($id));
         $data = self::$db->query($query);
-        if($data){
+        if ($data) {
             $queryDelete = sprintf("DELETE FROM questions_tags WHERE questionId = %s",
                 addslashes($id));
             self::$db->query($queryDelete);
@@ -214,7 +226,8 @@ class QuestionsModel extends BaseModel {
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $queryDeleteReferenceTags = sprintf("DELETE FROM questions_tags WHERE questionId = %s",
             addslashes($id));
         self::$db->query($queryDeleteReferenceTags);
@@ -225,10 +238,12 @@ class QuestionsModel extends BaseModel {
             "DELETE FROM questions WHERE Id = %s",
             addslashes($id));
         $data = self::$db->query($query);
+
         return $data;
     }
 
-    public function searchByQuestion($searchWord){
+    public function searchByQuestion($searchWord)
+    {
         $query = sprintf(
             "SELECT
                 q.Id,
@@ -238,10 +253,12 @@ class QuestionsModel extends BaseModel {
             ORDER BY Date DESC",
             addslashes($searchWord), addslashes($searchWord));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 
-    public function searchByAnswer($searchWord){
+    public function searchByAnswer($searchWord)
+    {
         $query = sprintf(
             "SELECT
                 distinct q.Id,
@@ -252,10 +269,12 @@ class QuestionsModel extends BaseModel {
             ORDER BY q.Date DESC",
             addslashes($searchWord));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 
-    public function searchByTag($searchWord){
+    public function searchByTag($searchWord)
+    {
         $query = sprintf(
             "SELECT
                 distinct q.Id,
@@ -267,10 +286,12 @@ class QuestionsModel extends BaseModel {
             ORDER BY Date DESC",
             addslashes($searchWord));
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 
-    public function ranking(){
+    public function ranking()
+    {
         $query = sprintf(
             "SELECT Username, COUNT(qu.Id) as Activity
               FROM users us LEFT JOIN questions qu ON us.Id = qu.User
@@ -278,6 +299,7 @@ class QuestionsModel extends BaseModel {
               ORDER BY COUNT(qu.Id) desc
               LIMIT 0, 10");
         $data = self::$db->query($query);
+
         return $this->process_results($data);
     }
 }
