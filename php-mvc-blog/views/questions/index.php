@@ -1,17 +1,5 @@
 <div class="row">
-    <div class="col-md-2 col-md-offset-1">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Categories</h3>
-            </div>
-                <a href="/questions/index/1/<?= $this->pageSize ?>"><div class="panel-body list-group-item">All</div></a>
-            <?php foreach ($this->categories as $cat) : ?>
-
-                    <a href="/questions/index/1/<?= $this->pageSize ?>/<?= $cat['Title'] ?>" ><div class="panel-body list-group-item"><?= $cat['Title'] ?> </div></a>
-
-            <?php endforeach ?>
-        </div>
-    </div>
+    <div class="col-md-12 col-md-offset-1">
     <div class="well well-lg col-md-8 questionMarginLeft">
         <div class="row">
             <div class="row">
@@ -60,5 +48,18 @@
         <?php if(sizeof($this->questions) == 0) :?>
             <h3>No results.</h3>
         <?php endif ?>
+    </div>
+
+    <div class="col-md-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Categories</h3>
+            </div>
+            <a href="/questions/index/1/<?= $this->pageSize ?>"><div class="panel-body list-group-item">All</div></a>
+            <?php foreach ($this->categories as $cat) : ?>
+                <a href="/questions/index/1/<?= $this->pageSize ?>/<?= $cat['Title'] ?>" ><div class="panel-body list-group-item"><?= $cat['Title'] ?> </div></a>
+            <?php endforeach ?>
+        </div>
+    </div>
     </div>
 </div>
