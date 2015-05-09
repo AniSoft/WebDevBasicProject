@@ -1,10 +1,12 @@
 body,html{
     height: 100%;
 }
+
 .wrapper{
     min-height: 100%;
     position: relative;
 }
+
 main{
     padding-bottom: 50px;
 }
@@ -20,6 +22,7 @@ main{
 .textWhite{
     color: white;
 }
+
 .textWhite:hover{
     color: black;
 }
@@ -29,7 +32,7 @@ main{
 }
 
 body header img {
-    width: 150px;
+    width: 75px;
 }
 
 body main img {
@@ -39,6 +42,7 @@ body main img {
 .questionMarginLeft{
     margin-left: 20px;
 }
+
 .list-group-item:hover{
     background: #c0c0c0;
 }
@@ -49,4 +53,9 @@ body main img {
 
 #perPage{
     width: 30px;
+}
+
+img{
+    margin: 5px;
+    float: left;
 }

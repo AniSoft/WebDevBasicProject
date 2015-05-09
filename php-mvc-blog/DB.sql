@@ -55,7 +55,7 @@ CREATE TABLE answers(
 );
 
 INSERT INTO users (Username, Password, Email, FullName, IsAdmin) 
-VALUES ("admin", "admin", "admin@gmail.bg", "Admin Admin", true);
+VALUES ("Administrator", "123", "administrator@gmail.bg", "Admin Admin", true);
 
 INSERT INTO tags (Title) 
 VALUES ("C#"),
@@ -84,9 +84,7 @@ VALUES ("C# ", "Защо получавам това..", NOW(), 0, 3, 1),
 ("Unity 3D", "Как да направя това...", NOW(), 0, 2, 1);
 
 INSERT INTO questions_tags (questionId, tagId) 
-VALUES (1,2),
-(3,4),
-(5,6);
+VALUES (1,2);
 
 INSERT INTO answers(Content, Date, Question, AuthorName, AuthorEmail) 
 VALUES ("Потърси в Google преди да питаш...", NOW(), 1, "Maria",""),
