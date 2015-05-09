@@ -1,82 +1,50 @@
 <?php
-include_once '/config/db.php';
-include_once '/controllers/master.php';
-include_once '/models/master.php';
-include_once '/library/phpLib/database.php';
-include_once '/library/phpLib/auth.php';
-include_once '/library/phpLib/Paging/Zebra_Pagination.php';
-include_once '/library/phpLib/Validator/Validator.php';
 
-use Valitron\Validator as V;
+session_start();
 
-V::langDir(__DIR__.'/library/phpLib/Validator/lang');
-V::lang('en');
+require_once('includes/config.php');
+require_once('library/password_hash.php');
+$requestParts = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-define('ROOT_DIR', dirname(__FILE__)) . '/';
-define('ROOT_DIR_NAME', basename(dirname(__FILE__)));
-$request = $_SERVER['REQUEST_URI'];
-$controller = 'master';
-$method = 'index';
-$params = array();
-
-if (!empty($request)) {
-    $requestAsParts = explode('/', $request);
-    $index = array_search(ROOT_DIR_NAME, $requestAsParts);
-    $newRequstParts = array_slice($requestAsParts, $index + 1);
-    $request = implode('/', $newRequstParts);
-    $routPrams = explode('/', $request, 3);
-
-    if (count($routPrams) > 1) {
-        list($controller, $method) = $routPrams;
-
-        if (isset($routPrams[2])) {
-            $params = $routPrams[2];
-        }
-
-        if (!file_exists('controllers/' . $controller . '.php')) {
-            header("Location: " .'home/index');
-            exit();
-        }
-
-        include_once 'controllers/' . $controller . '.php';
-    }
-
-    $controller_class = '\Controllers\\' . ucfirst($controller) . '_Controller';
-    $instance = new $controller_class();
-
-    $db_object = \Lib\Database::get_instance();
-    $dbConnection = $db_object::getDb();
-
-    //var_dump($db_object::getDb());
-
-
-    if (method_exists($instance, $method)) {
-        call_user_func_array(array($instance, $method), array($params));
-
-    } else {
-        header("Location: " . '/home/index');
-        exit();
+$controllerName = DEFAULT_CONTROLLER;
+if(count($requestParts) > 1 && $requestParts[1] != '') {
+    $controllerName = strtolower($requestParts[1]);
+    if (! preg_match('/^[a-zA-Z0-9_]+$/', $controllerName)) {
+        die('Invalid controller name. Use letters, digits and underscore only.');
     }
 }
 
+$actionName = DEFAULT_ACTION;
+if (count($requestParts) > 2 && $requestParts[2] != '') {
+    $actionName = strtolower($requestParts[2]);
+    if (! preg_match('/^[a-zA-Z0-9_]+$/', $actionName)) {
+        die('Invalid action name. Use letters, digits and underscore only.');
+    }
+}
 
-//<?php
-//require_once('application.php');
-//require_once('/includes/config.php');
-//
-//include_once '/library/phpLib/Paging/Zebra_Pagination.php';
-//include_once '/library/phpLib/Validator/Validator.php';
-//
-//session_start();
-//$app = Application::getInstance();
-//$app->start();
-//
-//function __autoload($class_name)
-//{
-//    if (file_exists("controllers/$class_name.php")) {
-//        include "controllers/$class_name.php";
-//    }
-//    if (file_exists("models/$class_name.php")) {
-//        include "models/$class_name.php";
-//    }
-//}
+$params = array_splice($requestParts, 3);
+
+$controllerClassName = ucfirst($controllerName) . 'Controller';
+$controllerFileName = "controllers/" . $controllerClassName . '.php';
+
+
+if (class_exists($controllerClassName)) {
+    $controller = new $controllerClassName($controllerName, $actionName);
+} else {
+    die("Cannot find controller '$controllerName' in class '$controllerFileName'");
+}
+
+if (method_exists($controller, $actionName)) {
+    call_user_func_array(array($controller, $actionName), $params);
+} else {
+    die("Cannot find action '$actionName' in controller '$controllerClassName'");
+}
+
+function __autoload($class_name) {
+    if (file_exists("controllers/$class_name.php")) {
+        include "controllers/$class_name.php";
+    }
+    if (file_exists("models/$class_name.php")) {
+        include "models/$class_name.php";
+    }
+}

@@ -1,0 +1,52 @@
+body,html{
+    height: 100%;
+}
+.wrapper{
+    min-height: 100%;
+    position: relative;
+}
+main{
+    padding-bottom: 50px;
+}
+
+.footer{
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.textWhite{
+    color: white;
+}
+.textWhite:hover{
+    color: black;
+}
+
+.top-buffer{
+    margin-top: 20px;
+}
+
+body header img {
+    width: 150px;
+}
+
+body main img {
+    width: 500px;
+}
+
+.questionMarginLeft{
+    margin-left: 20px;
+}
+.list-group-item:hover{
+    background: #c0c0c0;
+}
+
+.searchBtnMargin{
+    margin:5px;
+}
+
+#perPage{
+    width: 30px;
+}

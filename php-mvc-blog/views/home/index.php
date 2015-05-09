@@ -1,5 +1,3 @@
-<div class="jumbotron">
-    <h1>
-        Wellcome in my Creative Blog !
-    </h1>
+<div class="jumbotron col-md-6 col-md-offset-3 text-center">
+    <h1>Welcome to my Creative Forum</h1>
 </div>
