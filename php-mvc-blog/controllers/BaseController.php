@@ -17,10 +17,11 @@ class BaseController {
     }
 
     public function onInit(){
-
+        // Implement initializing logic in the subclasses
     }
 
     public function index() {
+        // Implement the default action in the subclasses
         $this->renderView();
     }
 
